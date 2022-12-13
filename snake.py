@@ -92,8 +92,7 @@ class snake():
         
     def reset(self,pos):
         self.head = cube(pos)
-        self.body = []
-        self.body.append(self.head)
+        self.body = [self.head]
         self.turns = {}
         self.dirnx = 0
         self.dirny = 1
@@ -130,7 +129,6 @@ def redrawWindow():
     s.draw(win)
     snack.draw(win)
     pygame.display.update()
-    pass
 
 
 
@@ -139,7 +137,7 @@ def drawGrid(w, rows, surface):
 
     x = 0
     y = 0
-    for l in range(rows):
+    for _ in range(rows):
         x = x + sizeBtwn
         y = y +sizeBtwn
 
@@ -154,10 +152,10 @@ def randomSnack(rows, item):
     while True:
         x = random.randrange(1,rows-1)
         y = random.randrange(1,rows-1)
-        if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
-               continue
+        if list(filter(lambda z: z.pos == (x, y), positions)):
+            continue
         else:
-               break
+            break
 
     return (x,y)
 
